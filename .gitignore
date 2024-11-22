@@ -1,7 +1,7 @@
 #testing and custom build code
 .terraform*
 *.log
-terraform.tfstate
+terraform.tfstate*
 
 #local files
 .DS_Store
