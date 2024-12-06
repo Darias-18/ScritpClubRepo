@@ -4,6 +4,11 @@ resource "akamai_property" "my_property" {
     contract_id = data.akamai_group.daniel_group.contract_id
     group_id    = data.akamai_group.daniel_group.id
     rules = data.akamai_property_rules_builder.darias_terraform_rule.json
+     hostnames {
+       cname_from = "www.dariasTerraform.com"
+       cname_to = akamai_edge_hostname.my_edge_hostname.edge_hostname
+       cert_provisioning_type = "DEFAULT"
+     }
 }
 
 resource "akamai_cp_code" "darias_cp_code" {
