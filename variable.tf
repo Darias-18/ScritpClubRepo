@@ -14,5 +14,12 @@ variable "group_id" {
   description = "Security Costa Rica group id"
 }
 
+variable "ab_test" {
+  default = "A"
 
+}
+
+variable "environment" {
+  type = string
+}
 

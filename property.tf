@@ -44,7 +44,7 @@ data "akamai_property_rules_builder" "darias_terraform_rule" {
     behavior {
       origin {
         origin_type                   = "CUSTOMER"
-        hostname                      = "dariasTerraform.org"
+        hostname                      = var.ab_test == "A" ? "dariasTerraform.org" : "otherOrigin.com"
         forward_host_header           = "ORIGIN_HOSTNAME"
         cache_key_hostname            = "REQUEST_HOST_HEADER"
         compress                      = true
@@ -60,6 +60,12 @@ data "akamai_property_rules_builder" "darias_terraform_rule" {
         }
       }
     }
-  
+    behavior {
+      caching {
+        behavior        = var.environment == "dev" ? "NO_STORE" : "MAX_AGE"
+        must_revalidate = false
+        ttl             = "7d"
+      }
+    }
   }
 }
